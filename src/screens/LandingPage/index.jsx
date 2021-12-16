@@ -69,6 +69,8 @@ export default function LandingPage() {
             </Table>
         </TableContainer>
         <Link to={{pathname:"/create"}}><Button variant="contained">Adicionar Produto</Button></Link>
+        <Link to={{pathname:"/listafornecedor"}}><Button variant="contained">Adicionar Fornecedor</Button></Link>
+        <Link to={{pathname:"/listatipoproduto"}}><Button variant="contained">Adicionar Tipo de Produto</Button></Link>
         </div>
 
     )
