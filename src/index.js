@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LandingPage from '../src/screens/LandingPage/index'
+import Rotas from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LandingPage/>
+    <Rotas/>
   </React.StrictMode>,
   document.getElementById('root')
 );

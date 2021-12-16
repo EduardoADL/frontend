@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import axios from 'axios'
-
+import { Link} from "react-router-dom"
 
 
 
@@ -20,11 +20,8 @@ export default function LandingPage() {
     useEffect(()=> {
         axios.get('http://localhost:8080/produto')
         .then((response) =>{
-          setProdutos(response.data)
-        })
-        .catch(()=> {
-          alert("Problema ao enviar formulario")
-        })
+            setProdutos(response.data)
+          })
     },[])
   
     function deletePost(id){
@@ -35,11 +32,12 @@ export default function LandingPage() {
 
 
     return (
+        <div>
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Nome</TableCell>
+                        <TableCell>Produto</TableCell>
                         <TableCell align="right">quantidade</TableCell>
                         <TableCell align="right">Preço de Venda</TableCell>
                         <TableCell align="right">Preço de Compra</TableCell>
@@ -63,13 +61,15 @@ export default function LandingPage() {
                             <TableCell align="right">{produto.precocompra}</TableCell>
                             <TableCell align="right">{produto.tipoProduto.tipoproduto}</TableCell>
                             <TableCell align="right">{produto.fornecedor.nomefornecedor}</TableCell>
-                            <TableCell align="right"><Button variant="contained" color="success">Editar</Button></TableCell>
+                            <TableCell align="right"><Link to={{pathname:`/edit/${produto.id}`}}><Button variant="contained">Editar</Button></Link></TableCell>
                             <TableCell align="right"><Button variant="outlined" color="error" onClick={() => deletePost(produto.id)}>Deletar</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
+        <Link to={{pathname:"/create"}}><Button variant="contained">Adicionar Produto</Button></Link>
+        </div>
 
     )
 }

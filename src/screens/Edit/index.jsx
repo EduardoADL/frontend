@@ -1,13 +1,14 @@
 import * as React  from "react";
 import {useEffect} from 'react'
 import "./index.css";
-import Menu from "../../component/menu/index"
 import TextField  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 import {useForm} from "react-hook-form"
 import {useParams} from "react-router-dom"
+//import Select from '@mui/material/Select';
 function Editar () {
+
 
     const {register, handleSubmit, reset} = useForm()
     
@@ -21,6 +22,7 @@ function Editar () {
     const addPost = data => axios.put(`http://localhost:8080/produto/${id}`, data)
    .then(() => {
        alert("Enviado")
+        window.location = '/'
    })
    .catch(()=>{
        alert("Email ou Telefone ja existente!")
@@ -43,8 +45,20 @@ function Editar () {
                 <div>
                     <TextField id="standard-basic"  label="precocompra" name="precocompra" InputLabelProps={{ shrink: true }} {...register("precocompra")} variant="standard" />
                 </div>
+                {/* <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                {...register("fornecedor.nomefornecedor")}
+                value={produtos.fornecedor.nomefornecedor}
+                onChange={handleChange}
+                label="Fornecedores"
+                >
+                 {produtos.map((produtoss) => (
+                <MenuItem value={produtoss.nomefornecedor}>{prosutoss.nomefornecedor}</MenuItem>
+                 ))}
+                </Select> */}
                 <div className="botao" >
-                    <Button variant="contained" type ="Submit"> Salvar </Button>
+                <Button variant="contained" type ="Submit" > Salvar </Button>
                 </div>
                 
             </form>
