@@ -33,7 +33,7 @@ function Formulario (){
         window.location = '/'
     })
     .catch(()=>{
-        alert("Email ou Telefone ja existente!")
+        alert("preencha os dados corretamente!")
     })
 
     return(
