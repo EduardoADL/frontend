@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState,useEffect } from "react";
 import "./index.css";
 import TextField  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -10,9 +11,28 @@ function Formulario (){
 
     const {register, handleSubmit} = useForm()
     
+    const [modalFornecedor, setModalFornecedor] = useState([])
+    useEffect(() => {
+        axios.get("http://localhost:8080/fornecedor")
+            .then((response) => {
+                setModalFornecedor(response.data)
+                console.log(modalFornecedor)
+            })
+    }, [])
+
+    const [tipoproduto, setTipoproduto] = useState([])
+    useEffect(() => {
+        axios.get("http://localhost:8080/tipoproduto")
+            .then((response) => {
+                setTipoproduto(response.data)
+                console.log(tipoproduto)
+            })
+    }, [])
+
      const addPost = async data => axios.post("http://localhost:8080/produto", data)
     .then(() => {
         alert("Enviado")
+        window.location = '/'
     })
     .catch(()=>{
         alert("Email ou Telefone ja existente!")
@@ -33,6 +53,16 @@ function Formulario (){
                 <div>
                     <TextField id="standard-basic"  label="Preço de Compra" name="precocompra" InputLabelProps={{ shrink: true }} {...register("precocompra")} variant="standard" />
                 </div>
+                <select {...register("fornecedor.id")} name="fornecedor.id" InputLabelProps={{ shrink: true }}>
+                    {modalFornecedor.map((fornecedor) => (
+                        <option key={fornecedor.id} value={fornecedor.id}>{fornecedor.nomefornecedor}</option>
+                    ))}
+                </select>
+                <select {...register("tipoProduto.id")} name="tipoProduto.id" InputLabelProps={{ shrink: true }}>
+                    {tipoproduto.map((tproduto) => (
+                        <option key={tproduto.id} value={tproduto.id}>{tproduto.tipoproduto}</option>
+                    ))}
+                </select>
                 <div className="botao" >
                     <Button variant="contained" type ="Submit"> Salvar </Button>
                 </div>
