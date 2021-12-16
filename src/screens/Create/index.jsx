@@ -15,8 +15,7 @@ function Formulario (){
     useEffect(() => {
         axios.get("http://localhost:8080/fornecedor")
             .then((response) => {
-                setModalFornecedor(response.data)
-                console.log(modalFornecedor)
+                setModalFornecedor(response.data)            
             })
     }, [])
 
@@ -24,8 +23,7 @@ function Formulario (){
     useEffect(() => {
         axios.get("http://localhost:8080/tipoproduto")
             .then((response) => {
-                setTipoproduto(response.data)
-                console.log(tipoproduto)
+                setTipoproduto(response.data)      
             })
     }, [])
 
@@ -42,7 +40,7 @@ function Formulario (){
         <div className="formulario">
             <form onSubmit={handleSubmit(addPost)}>
             <div>
-                    <TextField id="standard-basic" label="Nome do Produto" name="nome" InputLabelProps={{ shrink: true }} {...register("nome")} variant="standard" />
+                    <TextField id="standard-basic" label="Nome do Produto" name="nome" inputProps={{'data-testid':'nomeproduto'}} InputLabelProps={{ shrink: true }} {...register("nome")} variant="standard" />
                 </div>
                 <div>
                     <TextField id="standard-basic" label="quantidade" name="quantidade" InputLabelProps={{ shrink: true }} {...register("quantidade")} variant="standard" />
